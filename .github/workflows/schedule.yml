@@ -1,0 +1,48 @@
+name: Daily Article Generation
+
+on:
+  schedule:
+    # Morning: 05:30 UTC+8 = 21:30 UTC (previous day)
+    - cron: '30 21 * * *'
+    # Afternoon: 13:30 UTC+8 = 05:30 UTC
+    - cron: '30 5 * * *'
+    # Evening: 19:30 UTC+8 = 11:30 UTC
+    - cron: '30 11 * * *'
+  workflow_dispatch:
+    inputs:
+      slot:
+        description: 'Schedule slot to trigger'
+        required: true
+        default: 'morning'
+        type: choice
+        options:
+          - morning
+          - afternoon
+          - evening
+
+jobs:
+  trigger-schedule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine slot
+        id: slot
+        run: |
+          HOUR=$(date -u +%H)
+          MINUTE=$(date -u +%M)
+          if [ "$HOUR" = "21" ] && [ "$MINUTE" -ge "30" ]; then
+            echo "slot=morning" >> $GITHUB_OUTPUT
+          elif [ "$HOUR" = "05" ] && [ "$MINUTE" -ge "30" ]; then
+            echo "slot=afternoon" >> $GITHUB_OUTPUT
+          elif [ "$HOUR" = "11" ] && [ "$MINUTE" -ge "30" ]; then
+            echo "slot=evening" >> $GITHUB_OUTPUT
+          else
+            echo "slot=${{ github.event.inputs.slot || 'morning' }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Trigger article generation
+        run: |
+          curl -X POST "${{ secrets.SITE_URL }}/api/admin/schedule/trigger" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.SCHEDULE_SECRET }}" \
+            -d '{"slot": "${{ steps.slot.outputs.slot }}"}' \
+            --fail --show-error

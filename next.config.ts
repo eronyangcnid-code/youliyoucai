@@ -1,7 +1,11 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  images: {
+    remotePatterns: [],
+  },
+  // Allow RSS parsing from server components
+  serverExternalPackages: ['rss-parser'],
+}
 
-export default nextConfig;
+export default nextConfig

@@ -1,0 +1,129 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ArticleStatus {
+  draft
+  pending
+  warning
+  scheduled
+  published
+  rejected
+  unpublished
+}
+
+enum ArticleType {
+  prediction
+  knowledge
+}
+
+enum ScheduleSlot {
+  morning
+  afternoon
+  evening
+}
+
+enum GenerationType {
+  auto
+  manual
+}
+
+enum UserRole {
+  editor
+  reviewer
+  super_admin
+}
+
+model User {
+  id               String    @id @default(uuid())
+  email            String    @unique
+  name             String
+  password         String
+  role             UserRole  @default(editor)
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+  reviewedArticles Article[] @relation("ReviewedBy")
+
+  @@map("users")
+}
+
+model Category {
+  id          String        @id @default(uuid())
+  name        String        @unique
+  slug        String        @unique
+  description String?
+  slot        ScheduleSlot?
+  articles    Article[]
+  createdAt   DateTime      @default(now()) @map("created_at")
+
+  @@map("categories")
+}
+
+model Article {
+  id                 String         @id @default(uuid())
+  title              String
+  slug               String         @unique
+  content            String
+  summary            String?
+  status             ArticleStatus  @default(draft)
+  categoryId         String?        @map("category_id")
+  category           Category?      @relation(fields: [categoryId], references: [id])
+  tags               String[]
+  articleType        ArticleType    @default(knowledge) @map("article_type")
+  scheduleSlot       ScheduleSlot?  @map("schedule_slot")
+  generationType     GenerationType @default(auto) @map("generation_type")
+  sourceFeeds        String[]       @map("source_feeds")
+  sourceDataSnapshot Json?          @map("source_data_snapshot")
+  similarityScore    Float?         @map("similarity_score")
+  wordCount          Int?           @map("word_count")
+  scheduledPublishAt DateTime?      @map("scheduled_publish_at")
+  publishedAt        DateTime?      @map("published_at")
+  reviewedById       String?        @map("reviewed_by")
+  reviewedBy         User?          @relation("ReviewedBy", fields: [reviewedById], references: [id])
+  reviewNote         String?        @map("review_note")
+  createdAt          DateTime       @default(now()) @map("created_at")
+  updatedAt          DateTime       @updatedAt @map("updated_at")
+
+  @@map("articles")
+}
+
+model DataSource {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  type        String
+  url         String
+  slot        String[]
+  priority    Int       @default(5)
+  isActive    Boolean   @default(true) @map("is_active")
+  lastChecked DateTime? @map("last_checked")
+  lastStatus  String?   @map("last_status")
+  errorMsg    String?   @map("error_msg")
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  @@map("data_sources")
+}
+
+model ScheduleLog {
+  id        String       @id @default(uuid())
+  slot      ScheduleSlot
+  status    String
+  articleId String?      @map("article_id")
+  errorMsg  String?      @map("error_msg")
+  duration  Int?
+  createdAt DateTime     @default(now()) @map("created_at")
+
+  @@map("schedule_logs")
+}
+
+model SystemSetting {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("system_settings")
+}
