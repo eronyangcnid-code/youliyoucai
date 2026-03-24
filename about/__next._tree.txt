@@ -1,2 +1,2 @@
 :HL["/youliyoucai/_next/static/chunks/0qk7t4182ltqs.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"(public)","param":null,"prefetchHints":0,"slots":{"children":{"name":"about","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"tqVw23Zv9oyKh1LweLCiE"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"(public)","param":null,"prefetchHints":0,"slots":{"children":{"name":"about","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"_uZCVRg_b3rGX08BHnpnU"}
