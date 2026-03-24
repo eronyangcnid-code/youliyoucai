@@ -1,0 +1,2 @@
+:HL["/youliyoucai/_next/static/chunks/0qk7t4182ltqs.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"(public)","param":null,"prefetchHints":0,"slots":{"children":{"name":"tag","param":null,"prefetchHints":0,"slots":{"children":{"name":"tag","param":{"type":"d","key":"%25E5%258E%259F%25E6%25B2%25B9","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"dy425cxKFKt4gJKYn3Rcn"}

@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[22016,["/youliyoucai/_next/static/chunks/01xlw8hd842-c.js","/youliyoucai/_next/static/chunks/0d3shmwh5_nmn.js","/youliyoucai/_next/static/chunks/06h.djvf.9c_n.js"],""]
+3:I[97367,["/youliyoucai/_next/static/chunks/01xlw8hd842-c.js","/youliyoucai/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"max-w-6xl mx-auto px-4 py-8","children":[["$","nav",null,{"className":"text-sm text-gray-500 mb-6","children":[["$","$L2",null,{"href":"/","className":"hover:text-[#14532D]","children":"首頁"}],["$","span",null,{"className":"mx-2","children":"/"}],["$","span",null,{"className":"text-gray-700","children":"退休規劃"}]]}],["$","h1",null,{"className":"text-2xl font-bold text-[#14532D] mb-2","style":{"fontFamily":"Noto Serif TC, serif"},"children":"退休規劃"}],["$","p",null,{"className":"text-gray-600 mb-8","children":"退休金試算、勞退勞保、被動收入"}],["$","p",null,{"className":"text-gray-400 text-center py-16","children":"此分類尚無文章"}]]}],null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"dy425cxKFKt4gJKYn3Rcn"}
+5:null
